@@ -61,3 +61,24 @@ export const eliminarTarea = (
     id: number
 ): readonly Tarea[] =>
     lista.filter(t => t.id !== id);
+
+
+export const compose = <A, B, C>(
+    f: (b: B) => C,
+    g: (a: A) => B
+) => (x: A): C => f(g(x));
+
+
+export const buscarPendientesPorTitulo = (
+    lista: readonly Tarea[],
+    clave: string
+): readonly Tarea[] => {
+    const filtrarPendientes = (tareas: readonly Tarea[]) =>
+        filtrarPorEstado(tareas, "Pendiente");
+
+    const buscarPorClave = (tareas: readonly Tarea[]) =>
+        buscarPorTitulo(tareas, clave);
+
+    const buscarPendientes = compose(buscarPorClave, filtrarPendientes);
+    return buscarPendientes(lista);
+};
