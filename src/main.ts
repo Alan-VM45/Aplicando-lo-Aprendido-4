@@ -6,7 +6,8 @@ import {
     buscarPorTitulo,
     Tarea,
     EstadoTarea,
-    DificultadTarea
+    DificultadTarea,
+    eliminarTarea
     } from "./todoFuntions";
 
     let tareas: readonly Tarea[] = [];
